@@ -8,8 +8,13 @@ RSpec.describe 'Movie', type: :feature do
       visit admin_path
     end
 
-    it 'can see the All users table' do
-      expect(page).to have_content('User Table')
+    it 'can see the Banknotetable' do
+      expect(page).to have_content('Bamknote')
+    end
+
+     it 'can do edit Banknote table' do
+      click_button 'Edit'
+      expect(page).to have_content('Edit Banknote')
     end
   end
 end

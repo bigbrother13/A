@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>Banknote</h2>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>100$</th>
+        <th>50$</th>
+        <th>20$</th>
+        <th>10$</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @banknotes.each do |banknote| %>
+        <tr>
+          <td><%= banknote.hundred %></td>
+          <td><%= banknote.fifty %></td>
+          <td><%= banknote.twenty %></td>
+          <td><%= banknote.ten %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= link_to 'Edit', edit_admin_banknote_path(@banknotes)%>
+</body>
+</html>

@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   namespace :admin do
-  	root to: 'main#index'
-  	
-    get 'main/index'
+    root to: 'banknotes#index'
+    
+    resources :banknotes
   end
-
-  root 'stories#index'
-  resources :stories
 end

@@ -5,10 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.delete_all
+# User.delete_all
 
-User.create!(user_name: 'Vova', last_name: 'GV', email: Faker::Internet.email, admin: false)
-User.create!(user_name: 'Alex', last_name: 'GV', email: Faker::Internet.email, admin: false)
-User.create!(user_name: 'admin', last_name: 'admin', admin: true)
+Banknote.create!(hundred: '2', fifty: '3', twenty: '4', ten: '6')
+
 
 
