@@ -1,7 +1,7 @@
-<%= form_for @banknote do |f| %>
-  <%= f.input :hundred %>
-  <%= f.input :fifty %>
-  <%= f.input :twenty %>
-  <%= f.input :ten %>
+<%= form_for @banknote, url: {action: "edit"} do |f| %>
+  <%= f.text_field :hundred %>
+  <%= f.text_field  :fifty %>
+  <%= f.text_field  :twenty %>
+  <%= f.text_field  :ten %>
   <%= f.submit %>
 <% end %>

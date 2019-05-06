@@ -5,13 +5,13 @@ class Admin::BanknotesController < Admin::BaseController
   end
 
   def edit
-
+    @banknote = Banknote.first
   end
 
   def update
-    @banknote = Banknote(banknote_params)
-    if @banknote.save?
-      redirect_to @banknote, notice: 'Topic was create'
+    @banknote = Banknote.find(params[:id])
+    if @banknote.update_attributes(banknote_params)
+      redirect_to @banknote, notice: 'Banknote was create'
     else
       render :edit, error: 'Banknote was not create'
     end
