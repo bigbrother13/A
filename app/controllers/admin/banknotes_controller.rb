@@ -10,8 +10,8 @@ class Admin::BanknotesController < Admin::BaseController
 
   def update
     @banknote = Banknote.find(params[:id])
-    if @banknote.update_attributes(banknote_params)
-      redirect_to @banknote, notice: 'Banknote was create'
+    if @banknote.update(banknote_params)
+      redirect_to  admin_root_url, notice: 'Banknote was create'
     else
       render :edit, error: 'Banknote was not create'
     end
@@ -20,6 +20,6 @@ class Admin::BanknotesController < Admin::BaseController
   private
 
   def banknote_params
-    params.require(:banknote).permit%i( hundred fifty twenty ten)
+    params.require(:banknote).permit(:hundred, :fifty, :twenty, :ten)
   end
 end
