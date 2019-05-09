@@ -11,9 +11,9 @@ class Admin::BanknotesController < Admin::BaseController
   def update
     @banknote = Banknote.find(params[:id])
     if @banknote.update(banknote_params)
-      redirect_to  admin_root_url, notice: 'Banknote was create'
+      redirect_to  admin_root_url, notice: 'Banknote was update'
     else
-      render :edit, error: 'Banknote was not create'
+      render :edit, alert: 'Banknote was not update'
     end
   end
 
