@@ -5,7 +5,7 @@ class Admin::BanknotesController < Admin::BaseController
   end
 
   def edit
-    @banknote = Banknote.first
+    @banknote = Banknote.find(params[:id])
   end
 
   def update
@@ -20,6 +20,6 @@ class Admin::BanknotesController < Admin::BaseController
   private
 
   def banknote_params
-    params.require(:banknote).permit(:hundred, :fifty, :twenty, :ten)
+    params.require(:banknote).permit(:name, :quantity)
   end
 end

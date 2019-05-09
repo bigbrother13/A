@@ -12,26 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_05_06_084410) do
 
-  create_table "atms", force: :cascade do |t|
-    t.integer "cash"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "banknotes", force: :cascade do |t|
-    t.integer "hundred"
-    t.integer "fifty"
-    t.integer "twenty"
-    t.integer "ten"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "user_name"
-    t.string "last_name"
-    t.string "email"
-    t.boolean "admin"
+    t.string "name"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

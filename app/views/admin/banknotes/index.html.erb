@@ -1,26 +1,25 @@
 <div class="container">
-  <h2>Banknote</h2>            
+  <h2>Banknotes</h2>  
+  <%= link_to 'Add new banknote', new_admin_banknote_path, class: 'btn btn-success pull-right'%>          
   <table class="table">
     <thead>
       <tr>
-        <th>100$</th>
-        <th>50$</th>
-        <th>20$</th>
-        <th>10$</th>
+        <th>title</th>
+        <th>quantity</th>
       </tr>
     </thead>
     <tbody>
       <% @banknotes.each do |banknote| %>
         <tr>
-          <td><%= banknote.hundred %></td>
-          <td><%= banknote.fifty %></td>
-          <td><%= banknote.twenty %></td>
-          <td><%= banknote.ten %></td>
+          <td><%= banknote.name %></td>
+          <td><%= banknote.quantity %></td>
+          <td><%= link_to 'Edit', edit_admin_banknote_path(banknote)%>
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-<%= link_to 'Edit', edit_admin_banknote_path(@banknotes)%>
 </body>
 </html>
