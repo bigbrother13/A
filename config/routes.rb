@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   end
 
   root to: 'home#index'
-  get 'home#index'
+  post 'withdrawal', to: 'home#withdrawal'
 end

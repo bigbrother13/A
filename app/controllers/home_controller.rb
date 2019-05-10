@@ -5,6 +5,10 @@ class HomeController < ApplicationController
     Banknote.all.each do |banknote|
       @money += Banknote::NOMINAL[banknote.name] * banknote.quantity
     end
-
   end
+
+  def withdrawal
+ 	
+  end
+
 end

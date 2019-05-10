@@ -19,4 +19,11 @@ ActiveRecord::Schema.define(version: 2019_05_09_202804) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "visitors", force: :cascade do |t|
+    t.string "title"
+    t.integer "banknote"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end
