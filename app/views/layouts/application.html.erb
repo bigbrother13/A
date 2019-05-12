@@ -10,16 +10,7 @@
   </head>
 
   <body>
-    <div class='flash'>
-      <p class='notice'>
-        <%= notice %>
-      </p>
-      <p class='alert'>
-        <%= alert %>
-      </p>
-    </div>
-    <div class='flash'>
-      <%= yield %>
-    </div>
+    <%= render 'flash_messages' %>
+    <%= yield %>
   </body>
 </html>

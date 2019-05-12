@@ -1,6 +1,6 @@
 class Admin::BanknotesController < Admin::BaseController
 
-   def index
+  def index
     @banknotes = Banknote.all
   end
 
