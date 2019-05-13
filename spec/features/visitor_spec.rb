@@ -2,12 +2,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Bank', type: :feature do
-    let!(:banknote)   { create :banknote }
-    let!(:hundred) { create :hundred, banknote: banknote }
-    let!(:fifty) { create :fifty, banknote: banknote }
-    let!(:twenty) { create :twenty, banknote: banknote }
-    let!(:ten) { create :ten, banknote: banknote }
-    
+  let!(:hundred)   { create :banknote, name: 'hundred', quantity: 5 }
+
   before do
     visit home_path
   end
