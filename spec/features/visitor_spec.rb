@@ -17,14 +17,8 @@ RSpec.describe 'Bank', type: :feature do
   end 
 
   it 'when not enough money' do
-    fill_in 'Сalculate for', with: '100,000'
+    fill_in 'Сalculate for', with: '100000'
     click_button 'withdrawal money'
     expect(page).to have_content('Not enough money in the account')
-  end 
-
-  it 'have ended banknotes' do
-    fill_in 'Сalculate for', with: '100'
-    click_button 'withdrawal money'
-    expect(page).to have_content('Not enough banknotes')
   end 
 end
