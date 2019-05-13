@@ -9,13 +9,11 @@ class HomeController < ApplicationController
   end
 
   def withdrawal
-    @money = Money.new(options: money_params)
-    if @money.to_i
+    @money = Money.new(params)
+    if @money.calculate(params['amount'].to_i)
       flash[:success] = 'The operation was successful'
-    elsif
-      flash[:danger]  = 'Not enough money in the account'
     else
-      flash[:info]    = 'Not enough banknotes' 
+      flash[:danger]  = 'Not enough money in the account'
     end
 
     redirect_to home_path
@@ -24,7 +22,7 @@ class HomeController < ApplicationController
   private
 
   def money_params
-    params[:money] 
+    params [:money]
   end
 end
 
