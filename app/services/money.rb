@@ -1,35 +1,35 @@
 class Money
-  attr_accessor :banknote
-
   def initialize(params)
-    @banknote = banknote
+    @notes = params
   end
 
-  def calculate(amount)
-    @banknote = Banknote.all
-
-    max_cash = 0
-
-    Banknote.all.each do |banknote|
-      max_cash += Banknote::NOMINAL[banknote.name] * banknote.quantity
-    end
-
-    if amount < max_cash
-      @banknote.each do |banknote|
-        banknote_name = Banknote::NOMINAL[banknote.name]
-        expected = amount / banknote_name
-
-        if expected > banknote.quantity
-          amount = amount - (banknote.quantity * banknote_name)
-          banknote.quantity = 0
-        else
-          amount = amount - (banknote_name * expected)
-          banknote.quantity -= expected
-        end
-        banknote.save
-      end
+  def withdraw(sum)
+    path = withdraw_strategy(sum)
+    if path
+      path.each { |val| @notes[val] -= 1 }
     else
-      false
+      p 'Not enough money'
     end
+    path
+  end
+
+  def withdraw_paths(sum, notes = @notes)
+    res = []
+    available_notes = notes.select { |k, v| k <= sum && v > 0 }.keys
+    available_notes.each do |note|
+      if sum == note
+        res << [note]
+      else
+        paths = withdraw_paths(sum - note, notes.merge(note => notes[note] - 1))
+        paths.each { |variant| res << [note] + variant }
+      end
+    end
+    res.map(&:sort).uniq
+  end
+
+  private
+
+  def withdraw_strategy(sum)
+    withdraw_paths(sum).first
   end
 end
