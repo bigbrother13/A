@@ -10,9 +10,13 @@ class HomeController < ApplicationController
 
   def withdrawal
     @money = Money.new(money_params)
-
-    # @money = Money.new(params)
-    if @money.withdraw(money_params['amount'].to_i)
+    binding.pry
+    if result = @money.withdraw(params['amount'].to_i)
+      result.each do |nominal|
+        banknote = Banknote.find_by(name: Banknote::NOMINAL.key(nominal))
+        banknote.quantity -= 1
+        banknote.save
+      end
       flash[:success] = 'The operation was successful'
     else
       flash[:danger]  = 'Not enough money in the account'
@@ -24,13 +28,8 @@ class HomeController < ApplicationController
   private
 
   def money_params
-    # result = {}
-    #  Banknote.all.each do |banknote|
-    #   result[Banknote::NOMINAL[v]] = Banknote[v]
-    # end
-
     result = Banknote.all.each_with_object({}) do |(banknote), memo|
-      memo[Banknote::NOMINAL[banknote.name]] = banknote.quantity if Banknote[banknote.name]
+      memo[Banknote::NOMINAL[banknote.name]] = banknote.quantity
     end    
   end
 end
