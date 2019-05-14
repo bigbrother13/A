@@ -10,21 +10,27 @@ class HomeController < ApplicationController
 
   def withdrawal
     @money = Money.new(money_params)
+
     # @money = Money.new(params)
-    if @money.calculate(params['amount'].to_i)
+    if @money.withdraw(money_params['amount'].to_i)
       flash[:success] = 'The operation was successful'
     else
       flash[:danger]  = 'Not enough money in the account'
     end
 
-    redirect_to home_path
+     redirect_to home_path
   end
 
   private
 
   def money_params
-    # { 100 => 3, 50 => 3, 20 => 3, 10 => 3 }
+    # result = {}
+    #  Banknote.all.each do |banknote|
+    #   result[Banknote::NOMINAL[v]] = Banknote[v]
+    # end
+
+    result = Banknote.all.each_with_object({}) do |(banknote), memo|
+      memo[Banknote::NOMINAL[banknote.name]] = banknote.quantity if Banknote[banknote.name]
+    end    
   end
 end
-
-
