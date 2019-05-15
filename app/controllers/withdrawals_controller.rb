@@ -1,19 +1,15 @@
-class HomeController < ApplicationController
+class WithdrawalsController < ApplicationController
 
   def index
     @banknotes = Banknote.all
-    @money = 0
-    Banknote.all.each do |banknote|
-      @money += Banknote::NOMINAL[banknote.name] * banknote.quantity
-    end
+    Bancnote.self
   end
 
-  def withdrawal
+  def create
     @money = Money.new(money_params)
-    binding.pry
-    if result = @money.withdraw(params['amount'].to_i)
+    if result = @money.withdraw(withdrawal_params[:amount].to_i)
       result.each do |nominal|
-        banknote = Banknote.find_by(name: Banknote::NOMINAL.key(nominal))
+        banknote = Banknote.find_by(nominal: nominal)
         banknote.quantity -= 1
         banknote.save
       end
@@ -22,14 +18,18 @@ class HomeController < ApplicationController
       flash[:danger]  = 'Not enough money in the account'
     end
 
-     redirect_to home_path
+     redirect_to root_path
   end
 
   private
 
   def money_params
     result = Banknote.all.each_with_object({}) do |(banknote), memo|
-      memo[Banknote::NOMINAL[banknote.name]] = banknote.quantity
+      memo[banknote.nominal] = banknote.quantity
     end    
+  end
+
+  def withdrawal_params
+    params.require(:withdrawal).permit!
   end
 end

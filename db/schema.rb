@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_09_202804) do
+ActiveRecord::Schema.define(version: 2019_05_06_084410) do
 
   create_table "banknotes", force: :cascade do |t|
     t.string "name"
+    t.integer "nominal"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

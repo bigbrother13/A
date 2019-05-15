@@ -1,29 +1,31 @@
-<div class="container">
-<h1>Bank</h1>
-<h2><%= @money %></h2>
-	<%= form_tag({controller: "home", action: "withdrawal"}, method: "post") do %>
-	    <%= label_tag(:amount, "Сalculate for:") %>
-	    <%= text_field_tag(:amount) %>
-	    <%= submit_tag("withdrawal money") %>
-	<% end %>
+<div class='container'>
+  <h1>Bank</h1>
+  <h2>Total: <%= @money %></h2>
+  <div>
+    <%= simple_form_for :withdrawal do |f| %>
+      <%= f.input :amount %>
+      <%= f.submit('Withdraw') %>
+    <% end %>
+  </div>
+
   <h2>Available banknotes</h2>         
   <table class="table">
     <thead>
       <tr>
         <th>title</th>
+        <td>nominal</td>
         <th>quantity</th>
+
       </tr>
     </thead>
     <tbody>
       <% @banknotes.each do |banknote| %>
         <tr>
           <td><%= banknote.name %></td>
+          <td><%= banknote.nominal %></td>
           <td><%= banknote.quantity %></td>
-          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-</body>
-</html>

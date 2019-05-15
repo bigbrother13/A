@@ -1,3 +1,11 @@
 class Banknote < ApplicationRecord
-  NOMINAL = { 'hundred' => 100, 'fifty' => 50, 'twenty' => 20, 'ten' => 10 }
+
+  def total
+    @money = 0
+    Banknote.all.each do |banknote|
+      @money += banknote.nominal * banknote.quantity
+    end
+  end  
+
+
 end

@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # User.delete_all
 
-Banknote.create!(name: 'hundred', quantity: 2)
-Banknote.create!(name: 'fifty', quantity: 3)
-Banknote.create!(name: 'twenty', quantity: 5,)
-Banknote.create!(name: 'ten', quantity: 6)
+Banknote.create!(name: 'hundred', nominal: 100, quantity: 2)
+Banknote.create!(name: 'fifty',   nominal: 50,  quantity: 3)
+Banknote.create!(name: 'twenty',  nominal: 20,  quantity: 5)
+Banknote.create!(name: 'ten',     nominal: 10,  quantity: 6)
 
 
 
