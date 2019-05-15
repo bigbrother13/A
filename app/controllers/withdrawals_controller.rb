@@ -2,7 +2,7 @@ class WithdrawalsController < ApplicationController
 
   def index
     @banknotes = Banknote.all
-    Bancnote.self
+    @money = @banknotes.from_the_class
   end
 
   def create
