@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :banknote do
-    name      { 'hundred' }
-    quantity  { '5' }
+    nominal { 100 }
+    quantity  { 5 }
   end  
 end

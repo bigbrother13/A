@@ -4,13 +4,7 @@ class Money
   end
 
   def withdraw(sum)
-    path = withdraw_strategy(sum)
-    if path
-      path.each { |val| @notes[val] -= 1 }
-    else
-      p 'Not enough money'
-    end
-    path
+    withdraw_strategy(sum) || []
   end
 
   def withdraw_paths(sum, notes = @notes)

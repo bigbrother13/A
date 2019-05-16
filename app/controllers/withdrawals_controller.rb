@@ -2,22 +2,16 @@ class WithdrawalsController < ApplicationController
 
   def index
     @banknotes = Banknote.all
-    @money = @banknotes.from_the_class
   end
 
   def create
     @money = Money.new(money_params)
     if result = @money.withdraw(withdrawal_params[:amount].to_i)
-      result.each do |nominal|
-        banknote = Banknote.find_by(nominal: nominal)
-        banknote.quantity -= 1
-        banknote.save
-      end
+      Banknote.from_the_result
       flash[:success] = 'The operation was successful'
     else
       flash[:danger]  = 'Not enough money in the account'
     end
-
      redirect_to root_path
   end
 
