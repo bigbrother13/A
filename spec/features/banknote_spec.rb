@@ -7,12 +7,16 @@ RSpec.describe 'Banknote' do
   let!(:ten)     { create :banknote, nominal: 10,  quantity: 3 }
 
   it 'returns the chosen widthdraw path' do
-    atm = Banknote.new(100 => 3, 50 => 3, 20 => 3, 10 => 3)
-    expect(atm.total(540)).to eq(540)
+    expect(Banknote.total).to eq(540)
   end
 
   it 'get the necessary bills' do
-    expect().to eq()
+    Banknote.deduct([50,50])
+    banknote = Banknote.find_by(nominal: 50)
+    expect(banknote.quantity).to eq(1)
   end
 
+  it 'pass parameters to hash' do
+    expect(Banknote.to_h).to eq({100=>3, 50=>3, 20=>3, 10=>3})
+  end
 end

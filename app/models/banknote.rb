@@ -1,25 +1,20 @@
 class Banknote < ApplicationRecord
   class << self
     def total
-      money = 0
-      all.each do |banknote|
-        money += banknote.nominal * banknote.quantity
-      end
-      money
+      all.inject(0) { |sum, nominal| sum + nominal.nominal * nominal.quantity }
     end
 
     def deduct(notes)
-      notes.each do |nominal|
+      grouped = notes.group_by { |a| a }.map { |k, v| [k, v.size] }.to_h
+      grouped.each do |nominal, quantity|
         banknote = Banknote.find_by(nominal: nominal)
-        banknote.quantity -= 1
+        banknote.quantity -= quantity
         banknote.save
       end
     end
 
     def to_h
-      result = Banknote.all.each_with_object({}) do |(banknote), memo|
-        memo[banknote.nominal] = banknote.quantity
-      end
+      all.map { |a| [a.nominal, a.quantity] }.to_h
     end
   end
 end
