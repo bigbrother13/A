@@ -1,6 +1,6 @@
 <div class='container'>
   <h1>Bank</h1>
-  <h2>Total: <%= Banknote.from_the_class %></h2>
+  <h2>Total: <%= Banknote.total %></h2>
   <div>
     <%= simple_form_for :withdrawal do |f| %>
       <%= f.input :amount %>

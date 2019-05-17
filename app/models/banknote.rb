@@ -1,24 +1,25 @@
 class Banknote < ApplicationRecord
-
-  def self.from_the_class
-    @money = 0
-    all.each do |banknote|
-      @money += banknote.nominal * banknote.quantity
+  class << self
+    def total
+      money = 0
+      all.each do |banknote|
+        money += banknote.nominal * banknote.quantity
+      end
+      money
     end
-    @money
-  end
 
-  def self.from_the_result
-      result.each do |nominal|
+    def deduct(notes)
+      notes.each do |nominal|
         banknote = Banknote.find_by(nominal: nominal)
         banknote.quantity -= 1
         banknote.save
       end
+    end
+
+    def to_h
+      result = Banknote.all.each_with_object({}) do |(banknote), memo|
+        memo[banknote.nominal] = banknote.quantity
+      end
+    end
   end
 end
-
-hello = Banknote.new(@money.withdraw(withdrawal_params[:amount].to_i)
-hello.from_the_result
-
-
-
